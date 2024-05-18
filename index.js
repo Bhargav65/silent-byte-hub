@@ -141,6 +141,7 @@ app.get('/room',async(req,res)=>{
 
 app.post('/seconduser', async (req, res) => {
     const id = req.body.id;
+    db = client.db('chatapp').collection('chat');
     const doc = await db.findOne({ id: id });
 
     if (!doc) {
@@ -170,6 +171,7 @@ app.get('/chat',async(req,res)=>{
 })
 
 app.post('/firstuser', async(req, res) => {
+  db = client.db('chatapp').collection('chat');
     res.redirect(`/${req.body.id}`)
     const id=req.body.id
     app.get(`/${req.body.id}`, async(req, res) => {
