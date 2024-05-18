@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Room reached the limit</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+
+   
+</head>
+
+<body>
+    <div id="vanta-canvas">
+
+        <div id="notfound">
+            
+            <div class="notfound">
+                <div id="timer">00:05</div>
+
+                <div class="notfound-404">
+
+                    <h1>Oops!</h1>
+                </div>
+                <h2>ROOM HAS REACHED THE LIMIT</h2>
+                <br>
+                <p>Please enter a valid room id after being redirected or Create a new room.</p>
+                <br>
+                <p>Let's Chat</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        VANTA.WAVES({
+          el: "#vanta-canvas",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x151515,
+          zoom: 0.78
+        })
+    </script>
+
+    <script>
+        function redirect(url, time) {
+            setTimeout(function() {
+                window.location.href = url;
+            }, time);
+        }
+    
+        // Call the redirect function when the page loads
+        window.onload = function() {
+            // Specify the URL to redirect to and the duration in milliseconds (e.g., 10000 ms for 10 seconds)
+        redirect('/create_room', 5000);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startTimer(5); // Automatically starts a 5-second timer when the page loads
+        });
+        
+        function startTimer(duration) {
+            let timer = duration, seconds;
+            const display = document.getElementById('timer');
+        
+            const interval = setInterval(() => {
+                seconds = parseInt(timer, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+        
+                display.textContent = "00:" + seconds;
+        
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "Time's up!";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+<!-- This template was made by Colorlib (https://colorlib.com) -->
+</html>

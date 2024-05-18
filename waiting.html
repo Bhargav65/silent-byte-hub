@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Pure CSS Toast Notifications</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbar */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* Set body as relative */
+        }
+
+        #vanta-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loader {
+            position: relative;
+            width: 640px;
+            height: 430px;
+            margin-bottom: 10px;
+            border: 1px solid #d3d3d3;
+            padding: 15px;
+            background-color: #303030;
+            overflow: hidden;
+            border-radius: 10px;
+            z-index: 1; /* Ensure the loader is on top of the Vanta.js canvas */
+        }
+        .loader:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(110deg, rgba(227, 227, 227, 0) 0%, rgba(227, 227, 227, 0) 40%, rgba(227, 227, 227, 0.5) 50%, rgba(227, 227, 227, 0) 60%, rgba(227, 227, 227, 0) 100%);
+            animation: gradient-animation_2 1.2s linear infinite;
+        }
+        .loader .wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .loader .wrapper > div {
+            background-color: #cacaca;
+        }
+        .loader .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .loader .button {
+            display: inline-block;
+            height: 32px;
+            width: 75px;
+        }
+        .loader .line-1 {
+            position: absolute;
+            top: 11px;
+            left: 58px;
+            height: 10px;
+            width: 100px;
+        }
+        .loader .line-2 {
+            position: absolute;
+            top: 34px;
+            left: 58px;
+            height: 10px;
+            width: 150px;
+        }
+        .loader .line-3 {
+            position: absolute;
+            top: 57px;
+            left: 0px;
+            height: 10px;
+            width: 100%;
+        }
+        .loader .line-4 {
+            position: absolute;
+            top: 80px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }
+        .loader .line-5 {
+            position: absolute;
+            top: 70px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }
+        .loader .line-6 {
+            position: absolute;
+            top: 126px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }.loader .line-7 {
+            position: absolute;
+            top: 153px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }.loader .line-8 {
+            position: absolute;
+            top: 180px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }.loader .line-9 {
+            position: absolute;
+            top: 203px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }.loader .line-10 {
+            position: absolute;
+            top: 226px;
+            left: 0px;
+            height: 10px;
+            width: 92%;
+        }
+        
+        
+        @keyframes gradient-animation_2 {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        * {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.buttons button {
+    color: #fff;
+    border: 0;
+    outline: 0;
+    width: 200px;
+    font-size: 24px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+
+
+.buttons .info {
+    background: skyblue;
+}
+
+ #toastBox {
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 18px;
+            font-family:'Helvetica', 'Arial', sans-serif;
+        }
+
+.toast {
+    width: 375px;
+    height: 60px;
+    background: #fff;
+    font-weight: bold;
+
+    margin: 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 5px;
+    transform: translateX(100%);
+    animation: moveLeft 0.4s linear forwards;
+}
+
+@keyframes moveLeft {
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.toast i {
+    margin: 0 20px;
+    font-size: 35px;
+    color: green;
+}
+
+
+
+.toast.info i {
+    color: rgb(40, 41, 41);
+    size: 10px;
+}
+
+.toast::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: green;
+    animation: anim 5s linear;
+}
+
+@keyframes anim {
+    100% {
+        width: 0;
+    }
+}
+
+
+.toast.info::after {
+    background: rgb(124, 124, 124);
+}
+#vanta-canvas{
+    height: 100%;
+  }
+  
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+
+    <div id="vanta-canvas"></div>
+    <div class="loader" id="hello">
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="line-1"></div>
+            <div class="line-2"></div>
+            <div class="line-3"></div>
+            <div class="line-4"></div>
+            <div class="line-6"></div>
+            <div class="line-7"></div>
+            <div class="line-8"></div>
+            <div class="line-9"></div>
+            <div class="line-10"></div>
+
+        </div>
+
+    </div>
+    <div class="buttons">
+        <button class="info" onclick="showToast(infoMsg)" style="display: none;">Info</button>
+    </div>
+
+    <div id="toastBox"></div>
+    <script>
+        VANTA.WAVES({
+          el: "#vanta-canvas",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x151515,
+          zoom: 0.78
+        })
+    </script>
+<script>
+const button = document.querySelector('.info');
+
+function simulateButtonClick() {
+    const button = document.querySelector('.info');
+
+    button.click();    
+}
+
+// Add an event listener to the DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+    // Call the function to simulate button click when the page is loaded
+    simulateButtonClick();
+});
+
+let infoMsg = '<i class="fa-solid fa-circle-info"></i> Info: Please wait until other user joins';
+
+function showToast(msg) {
+let toast = document.createElement("div");
+toast.classList.add("toast");
+toast.innerHTML = msg;
+toastBox.appendChild(toast);
+
+if (msg.includes("info")) {
+    toast.classList.add("info")
+}
+
+setTimeout(() => {
+    toast.remove();
+}, 5000)
+}
+
+</script>
+    
+    <script src="/socket.io/socket.io.js"></script> 
+    <script> 
+        let socket = io(); 
+        socket.on('send name', (username) => { 
+    if (username.hello === "hello") {
+        localStorage.clear()
+        localStorage.setItem('id', username['id']);
+        document.getElementById("hello").style.display = 'inline-block';
+    }
+    else{
+        window.location.replace("/chat");
+    }
+});
+    </script>
+</body>
+</html>
