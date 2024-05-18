@@ -15,13 +15,19 @@ const uri = process.env.uri;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-client.connect((err) => {
-    if (err) {
-      console.log(err)
-    }
+const connectToMongoDB = async () => {
+  try {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    await client.connect();
     console.log('Connected to MongoDB Atlas');
-    db = client.db('chatapp').collection('chat')
-  });
+    db = client.db('chatapp').collection('chat');
+  } catch (err) {
+    console.error('Failed to connect to MongoDB Atlas', err);
+    process.exit(1); // Exit process with failure
+  }
+};
+
+connectToMongoDB();
 
 
 app.use(bodyParser.json());
