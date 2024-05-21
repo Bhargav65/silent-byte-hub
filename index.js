@@ -183,7 +183,8 @@ app.post('/firstuser', async(req, res) => {
 })
 
 
-app.post('/logout',(req,res)=>{
+app.post('/logout',async(req,res)=>{
+  await db.deleteOne({id:req.body.hide});
   io.emit(`logout${req.body.hide}`, "logout");
 })
 

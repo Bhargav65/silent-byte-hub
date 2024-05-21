@@ -8,6 +8,7 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link type="text/css" rel="stylesheet" href="/css/chat.css" />
+    <script src="/emoji-button.min.js"></script>
 
 	<title>Chat Template UI using HTML and CSS</title> 
 </head> 
@@ -62,7 +63,10 @@
                     <div class="typing-loader"></div>            
                 </div>
 			<div class="message"> 
-                
+        <button id="emoji-button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16" style="fill:#00ff6a";>
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.5 3.5 0 0 0 8 11.5a3.5 3.5 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5"/>
+        </svg></button>
 				<input type="text"
 					placeholder="Type your message..." id="messageInput" autocomplete="off" class="input1" style="font-family:'Helvetica', 'Arial', sans-serif; "> 
 					<button id="sendButton" onclick="sendMessage()">
@@ -126,7 +130,66 @@
         })
     </script>
    <script src="/socket.io/socket.io.js"></script> <!-- Ensure Socket.IO client script is loaded -->
+   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var picker = new EmojiButton();
+      var button = document.querySelector('#emoji-button');
+      var input = document.querySelector('#messageInput');
+      
+      button.addEventListener('click', function () {
+        picker.showPicker(button);
+      });
 
+      picker.on('emoji', function (emoji) {
+        input.value += emoji;
+      });
+
+     
+    });
+</script>
+<script> 
+  /** 
+   * Disable right-click of mouse, F12 key, and save key combinations on page 
+   */ 
+   document.addEventListener("contextmenu", function(e){ 
+   e.preventDefault(); 
+   }, false); 
+   document.addEventListener("keydown", function(e) { 
+   //document.onkeydown = function(e) { 
+   // "I" key 
+   if (e.ctrlKey && e.shiftKey && e.keyCode == 73) { 
+   disabledEvent(e); 
+   } 
+   // "J" key 
+   if (e.ctrlKey && e.shiftKey && e.keyCode == 74) { 
+   disabledEvent(e); 
+   } 
+   // "S" key + macOS 
+   if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) { 
+   disabledEvent(e); 
+   } 
+   // "U" key 
+   if (e.ctrlKey && e.keyCode == 85) { 
+   disabledEvent(e); 
+   } 
+   // "F12" key 
+   if (event.keyCode == 123) { 
+   disabledEvent(e); 
+   } 
+   // "C" key 
+   if (e.ctrlKey && event.keyCode == 67) { 
+   disabledEvent(e); 
+   } 
+   }, false); 
+   function disabledEvent(e){ 
+   if (e.stopPropagation){ 
+   e.stopPropagation(); 
+   } else if (window.event){ 
+   window.event.cancelBubble = true; 
+   } 
+   e.preventDefault(); 
+   return false; 
+   }</script> 
    <script>
     window.addEventListener('beforeunload', function(event) {
       var xhr = new XMLHttpRequest();
