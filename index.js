@@ -8,6 +8,7 @@ const io = new Server(server);
 require('dotenv').config();
 const port = process.env.PORT ||3000; 
 app.use(express.static(__dirname));
+const ngrok = require('@ngrok/ngrok');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.uri;
@@ -190,3 +191,8 @@ app.post('/logout',async(req,res)=>{
 server.listen(port, () => { 
 	console.log(`Server is listening at the port: ${port}`); 
 });
+
+
+
+ngrok.connect({ addr: 3000, authtoken:"2ZZTjHkvF26r7A3KHoVX5AhTMgx_3grJDiiZDAzRLYuYXBFHu",   domain: "adversely-enjoyed-mudfish.ngrok-free.app",})
+	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
