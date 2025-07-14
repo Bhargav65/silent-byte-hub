@@ -193,6 +193,5 @@ server.listen(port, () => {
 });
 
 
-ngrok.connect({ addr: 3000, authtoken:"2zsJlkUX6nmUinIXaJDErdJK29p_5qkQjLbG16TB9uHw3kV1b",   domain: "heartily-main-sturgeon.ngrok-free.app",})
-	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
+
 
